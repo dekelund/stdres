@@ -16,15 +16,15 @@ type Result uint
 
 // Foreground colors
 const (
-	RESET   = "\033[00m"
-	BLACK   = "\033[30m"
-	RED     = "\033[31m"
-	GREEN   = "\033[32m"
-	YELLOW  = "\033[33m"
-	BLUE    = "\033[34m"
-	MAGENTA = "\033[35m"
-	CYAN    = "\033[36m"
-	WHITE   = "\033[37m"
+	reset   = "\033[00m"
+	black   = "\033[30m"
+	red     = "\033[31m"
+	green   = "\033[32m"
+	yellow  = "\033[33m"
+	blue    = "\033[34m"
+	magenta = "\033[35m"
+	cyan    = "\033[36m"
+	white   = "\033[37m"
 )
 
 const (
@@ -72,20 +72,20 @@ func (outBuffer *Buffer) Flush() {
 
 		switch record.Result {
 		case UNKNOWN:
-			color = CYAN
+			color = cyan
 		case PENDING:
-			color = YELLOW
+			color = yellow
 		case SUCCESS:
-			color = GREEN
+			color = green
 		case FAILURE:
-			color = RED
+			color = red
 		case INFO:
-			color = BLUE
+			color = blue
 		case PLAIN:
-			color = WHITE
+			color = white
 		}
 
-		fmt.Print(color, record.String(), RESET)
+		fmt.Print(color, record.String(), reset)
 	}
 }
 
