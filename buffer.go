@@ -89,13 +89,9 @@ func (outBuffer *Buffer) Flush() {
 	}
 }
 
-func (outBuffer *Buffer) printer(message string, newline bool) *Record {
+func (outBuffer *Buffer) printer(message string) *Record {
 	if outBuffer.buffer == nil {
 		outBuffer.buffer = make([]*Record, 0, 500)
-	}
-
-	if newline {
-		message = message + "\n"
 	}
 
 	out := &Record{UNKNOWN, message}
@@ -108,12 +104,20 @@ func (outBuffer *Buffer) printer(message string, newline bool) *Record {
 // Text not printed until Buffer.Flush has been called.
 // It returns current status and text string as Record.
 func (outBuffer *Buffer) Print(message string) *Record {
-	return outBuffer.printer(message, false)
+	return outBuffer.printer(message)
 }
 
 // Println records message followed by newline to buffer to be printed later
 // Text not printed until Buffer.Flush has been called.
 // It returns current status and text string as Record.
 func (outBuffer *Buffer) Println(message string) *Record {
-	return outBuffer.printer(message, true)
+	return outBuffer.printer(message + "\n")
+}
+
+// Printf records formatted message to buffer to be printed later
+// Printf formats according to a format specifier and returns
+// current status and text as Record.
+func (outBuffer *Buffer) Printf(format string, a ...interface{}) *Record {
+	message := fmt.Sprintf(format, a...)
+	return outBuffer.printer(message)
 }

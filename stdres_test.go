@@ -9,7 +9,7 @@ func Example() {
 	firstAction := buffer.Println("Executing first action")
 	secondAction := buffer.Println("Executing second action")
 	thirdAction := buffer.Println("Executing third action")
-	fourthAction := buffer.Println("Executing fourth action")
+	fourthAction := buffer.Printf("Executing fourth action, printed with number one - %d\n", 1)
 	buffer.Print("Executing fifth action") // Never updated, printed with UNKNOWN state which result in Cyan color
 
 	firstAction.Result = stdres.SUCCESS  // First action succeeded, line printed in green
@@ -24,6 +24,6 @@ func Example() {
 	// Executing first action
 	// Executing second action
 	// Executing third action
-	// Executing fourth action
+	// Executing fourth action, printed with number one - 1
 	// Executing fifth action
 }
